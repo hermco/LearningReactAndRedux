@@ -44,16 +44,28 @@ class SearchBar extends Component {
 
 }
 
-// w/e is returned ends up as a prop in the object CONNECTED to this function
 function mapStateToProps(state) { //state is a global state managed by reducers, specifically the root reducer
   return {
     weather: state.weather // in a way, we're kinda subscribing to the response element in our global state
   };
 }
 
-// w/e is returned ends up as a prop in the object CONNECTED to this function
 function mapDispatchToProps(dispatch) { //dispatch allows the action executed to be DISPATCHED to all the reducers
-  return bindActionCreators ({ fetchWeather }, dispatch); //whenever selectBook is called (upon selection), the action associated here is called
+  return bindActionCreators ({ fetchWeather }, dispatch); //whenever fetchWeather is called (upon selection), the action associated here is called
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SearchBar);
+/*
+return (
+  fetchWeather : () => dispatch{
+    {fetchWeather}
+  },
+  blabla : () => dispatch {
+    //do smth
+  }
+  ... // c'est un peu répétitif, d'où bindActionCreators qui applique dispatch sur nos actions!
+);
+*/
+
+// w/e is returned ends up as a prop in the object CONNECTED to this function
+//export default connect(mapStateToProps, mapDispatchToProps )(SearchBar);
+export default connect(mapStateToProps, {fetchWeather} )(SearchBar);
